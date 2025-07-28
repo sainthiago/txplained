@@ -61,7 +61,7 @@ export function TransactionInterface() {
       txHash = extractedHash;
     }
 
-    if (!isValidTxHash(txHash)) {
+    if (!isValidTxHash(txHash) && !isLoading) {
              setError("Invalid transaction hash. Please provide a valid EVM transaction hash (66-character hex starting with &apos;0x&apos;), Solana signature (87-88 character base58), or a valid explorer URL.");
       return;
     }
