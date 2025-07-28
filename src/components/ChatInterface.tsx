@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Send, Loader2, AlertCircle, CheckCircle2, Link as LinkIcon } from 'lucide-react';
 import { ChatMessage } from '@/types';
 import { MessageBubble } from './MessageBubble';
 import { TransactionInput } from './TransactionInput';

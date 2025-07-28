@@ -2,9 +2,11 @@
 
 🔍 **TX or didn't happen.**
 
-An intelligent transaction analyzer that explains blockchain transactions in plain English. Simply paste any transaction hash from supported chains and get a human-friendly explanation of what happened.
+A clean, modern frontend for the TXplained transaction analysis service. Simply paste any transaction hash from supported chains and get a human-friendly explanation of what happened.
 
 ## 🌐 Supported Chains
+
+This app leverages the [TXplained API](https://txplained-agent.vercel.app/) which supports:
 
 ### EVM Compatible Chains
 - **Ethereum** - The original smart contract platform
@@ -65,19 +67,16 @@ An intelligent transaction analyzer that explains blockchain transactions in pla
 
 ## 🔧 Architecture
 
-### Chain Detection
-The app uses a multi-step approach to identify transactions:
+This is a lightweight Next.js frontend that provides a clean interface for the TXplained analysis service.
 
-1. **Format Validation**: Distinguishes between EVM (hex) and Solana (base58) formats
-2. **Parallel RPC Queries**: Queries relevant chains simultaneously for fast detection
-3. **Response Validation**: Confirms transaction exists and is valid
-
-### Transaction Analysis
-- **EVM Chains**: Analyzes receipt logs, gas usage, and method calls
-- **Solana**: Examines instruction types, program interactions, and account changes
-- **AI Processing**: Converts raw blockchain data into human-readable explanations
+### How It Works
+1. **User Input**: Accept transaction hashes or explorer URLs
+2. **Format Validation**: Basic client-side validation for hash formats
+3. **API Proxy**: Forward requests to the [TXplained API](https://txplained-agent.vercel.app/)
+4. **UI Display**: Present the analysis results in a chat-like interface
 
 ### Supported Transaction Types
+The external TXplained API handles analysis for:
 
 #### EVM Chains
 - ✅ Simple ETH/token transfers
@@ -101,22 +100,7 @@ The app uses a multi-step approach to identify transactions:
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **Icons**: Lucide React + Heroicons
-- **Blockchain**: Multi-chain RPC integration
-
-## 🔗 Chain Configuration
-
-The app supports easy addition of new chains through the `src/lib/chains.ts` configuration:
-
-```typescript
-{
-  chainId: 101,
-  name: 'Solana',
-  rpcUrl: 'https://api.mainnet-beta.solana.com',
-  explorerUrl: 'https://solscan.io',
-  type: 'solana',
-  nativeCurrency: { name: 'Solana', symbol: 'SOL', decimals: 9 }
-}
-```
+- **API**: [TXplained Service](https://txplained-agent.vercel.app/)
 
 ## 🎯 Use Cases
 
@@ -128,7 +112,7 @@ The app supports easy addition of new chains through the `src/lib/chains.ts` con
 
 ## 📝 API Usage
 
-The analyzer exposes a REST API for programmatic access:
+This frontend exposes a simple proxy API:
 
 ```typescript
 POST /api/analyze-transaction
@@ -137,12 +121,9 @@ POST /api/analyze-transaction
 }
 ```
 
-Response includes:
-- Transaction details
-- Human-readable explanation
-- Risk assessment
-- Gas/fee analysis
-- Chain-specific metadata
+The request is forwarded to the TXplained service at `https://txplained-agent.vercel.app/api/analyze-transaction`.
+
+For direct API access, you can use the TXplained service directly.
 
 ## 🏷️ About TXplained
 

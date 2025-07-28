@@ -1,57 +1,4 @@
-export interface TransactionData {
-  hash: string;
-  chainId: number;
-  chainName: string;
-  blockNumber: number;
-  from: string;
-  to: string | null;
-  value: string;
-  gasUsed: string;
-  gasPrice: string;
-  status: 'success' | 'failed';
-  methodName?: string;
-  functionName?: string;
-  logs: TransactionLog[];
-  timestamp: number;
-  // Solana-specific fields
-  slot?: number;
-  fee?: string;
-  signatures?: string[];
-  accountKeys?: string[];
-  instructions?: SolanaInstruction[];
-}
-
-export interface TransactionLog {
-  address: string;
-  topics: string[];
-  data: string;
-  decoded?: {
-    name: string;
-    args: Record<string, unknown>[];
-  };
-}
-
-export interface SolanaInstruction {
-  programId: string;
-  accounts: string[];
-  data: string;
-  innerInstructions?: SolanaInstruction[];
-}
-
-export interface ChainConfig {
-  chainId: number;
-  name: string;
-  rpcUrl: string;
-  explorerUrl: string;
-  nativeCurrency: {
-    name: string;
-    symbol: string;
-    decimals: number;
-  };
-  // Add chain type to distinguish between EVM and Solana
-  type?: 'evm' | 'solana';
-}
-
+// Keep only the interfaces that are still used by the frontend
 export interface TransactionAnalysis {
   summary: string;
   action: string;
@@ -64,6 +11,15 @@ export interface TransactionAnalysis {
     price: string;
     total: string;
   };
+}
+
+export interface TransactionData {
+  hash: string;
+  chainName: string;
+  blockNumber?: number;
+  from?: string;
+  to?: string;
+  timestamp?: number;
 }
 
 export interface ChatMessage {
