@@ -31,10 +31,16 @@ export interface TransactionAnalysis {
 }
 
 export interface TokenTransfer {
-  token: string;
+  token: string | {
+    address: string;
+    symbol?: string;
+    name?: string;
+    decimals?: number;
+  };
   from: string;
   to: string;
   amount: string;
+  formattedAmount: string;
   symbol?: string;
   decimals?: number;
 }

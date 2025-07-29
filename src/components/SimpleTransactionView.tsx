@@ -106,6 +106,8 @@ export function SimpleTransactionView({ txHash, apiResponse, isLoading }: Simple
         return `${address.slice(0, 6)}...${address.slice(-4)}`;
     };
 
+    console.log('apiResponse', {apiResponse});
+
     const formatValue = (value: string, symbol = 'ETH') => {
         const num = parseFloat(value);
         if (num === 0) return '0';
@@ -283,7 +285,7 @@ export function SimpleTransactionView({ txHash, apiResponse, isLoading }: Simple
                                     <button
                                         key={tab}
                                         onClick={() => setActiveTab(tab as 'overview' | 'technical' | 'breakdown')}
-                                        className={`py-2 px-1 border-b-2 font-medium text-sm capitalize transition-colors ${activeTab === tab
+                                        className={`py-2 px-1 border-b-2 font-medium text-sm capitalize transition-colors cursor-pointer ${activeTab === tab
                                             ? 'border-emerald-500 text-emerald-600'
                                             : 'border-transparent text-slate-500 hover:text-slate-700'
                                             }`}
@@ -425,7 +427,7 @@ export function SimpleTransactionView({ txHash, apiResponse, isLoading }: Simple
                                         <div className="flex items-center space-x-2 mb-2">
                                             <span className="text-sm font-medium text-teal-800">Total Cost</span>
                                         </div>
-                                        <p className="text-lg font-bold text-teal-900">{analysis.gasInfo.total}</p>
+                                        <p className="text-lg font-bold text-teal-900 break-all">{analysis.gasInfo.total}</p>
                                         {txData.fee && (
                                             <p className="text-xs text-teal-700 mt-1">Fee: {txData.fee}</p>
                                         )}
@@ -799,11 +801,21 @@ export function SimpleTransactionView({ txHash, apiResponse, isLoading }: Simple
                                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
                                                         <div>
                                                             <p className="font-medium text-emerald-800">Token</p>
-                                                            <p className="text-emerald-700">{transfer.symbol || transfer.token}</p>
+                                                            <p className="text-emerald-700">
+                                                                {transfer.symbol || 
+                                                                 (typeof transfer.token === 'object' && transfer.token?.symbol) || 
+                                                                 (typeof transfer.token === 'object' && transfer.token?.name) ||
+                                                                 (typeof transfer.token === 'string' ? transfer.token : 'Unknown Token')}
+                                                            </p>
+                                                            {typeof transfer.token === 'object' && transfer.token?.address && (
+                                                                <p className="text-xs text-emerald-600 font-mono mt-1">
+                                                                    {formatAddress(transfer.token.address)}
+                                                                </p>
+                                                            )}
                                                         </div>
                                                         <div>
                                                             <p className="font-medium text-emerald-800">Amount</p>
-                                                            <p className="text-emerald-700">{transfer.amount}</p>
+                                                            <p className="text-emerald-700">{transfer.formattedAmount}</p>
                                                         </div>
                                                         <div>
                                                             <p className="font-medium text-emerald-800">From → To</p>
