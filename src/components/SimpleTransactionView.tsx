@@ -64,7 +64,11 @@ export function SimpleTransactionView({ txHash, apiResponse, isLoading }: Simple
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        messagesEndRef.current?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'end',
+            inline: 'nearest',
+        });
     };
 
     useEffect(() => {
@@ -850,38 +854,6 @@ export function SimpleTransactionView({ txHash, apiResponse, isLoading }: Simple
 
                     {/* Messages Area */}
                     <div
-                        ref={(el) => {
-                            if (el) {
-                                // Completely prevent scroll propagation
-                                const preventScrollPropagation = (e: Event) => {
-                                    e.stopPropagation();
-                                };
-
-                                const preventWheelPropagation = (e: WheelEvent) => {
-                                    const element = e.currentTarget as HTMLElement;
-                                    const isScrolledToTop = element.scrollTop === 0;
-                                    const isScrolledToBottom = element.scrollTop + element.clientHeight >= element.scrollHeight;
-
-                                    // Always stop propagation
-                                    e.stopPropagation();
-
-                                    // Only prevent default if we're at boundaries to allow internal scrolling
-                                    if ((isScrolledToTop && e.deltaY < 0) || (isScrolledToBottom && e.deltaY > 0)) {
-                                        e.preventDefault();
-                                    }
-                                };
-
-                                // Remove existing listeners first
-                                el.removeEventListener('scroll', preventScrollPropagation);
-                                el.removeEventListener('wheel', preventWheelPropagation);
-                                el.removeEventListener('touchmove', preventScrollPropagation);
-
-                                // Add listeners
-                                el.addEventListener('scroll', preventScrollPropagation, { passive: false });
-                                el.addEventListener('wheel', preventWheelPropagation, { passive: false });
-                                el.addEventListener('touchmove', preventScrollPropagation, { passive: false });
-                            }
-                        }}
                         className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0"
                         style={{
                             overscrollBehavior: 'contain',
