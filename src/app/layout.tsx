@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TXplained - TX or didn't happen",
-  description: "Multi-chain AI-powered transaction analyzer. Submit any transaction hash and get human-friendly explanations of what happened. TX or didn't happen.",
+  title: "txplained - tx or didn't happen",
+  description: "Multi-chain AI-powered transaction analyzer. Submit any transaction hash and get human-friendly explanations of what happened. tx or didn't happen.",
 };
 
 export default function RootLayout({

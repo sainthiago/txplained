@@ -43,10 +43,10 @@ export function SimpleHeader({ initialValue = '', isLoading }: SimpleHeaderProps
                             </div>
                             <div>
                                 <span className="text-xl font-bold text-slate-900">
-                                    TXplained
+                                    txplained
                                 </span>
                                 <div className="text-xs text-slate-600 font-medium">
-                                    TX or didn&apos;t happen
+                                    tx or didn&apos;t happen
                                 </div>
                             </div>
                         </div></Link>

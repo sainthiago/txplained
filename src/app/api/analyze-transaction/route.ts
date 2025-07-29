@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     // Use the same endpoint for both initial analysis and follow-up questions
     const endpoint = 'https://txplained-agent.vercel.app/api/tools/analyze-transaction';
 
-    // Call the external TXplained API
+    // Call the external txplained API
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: {

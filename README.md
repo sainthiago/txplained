@@ -1,12 +1,12 @@
-# TXplained - Multi-Chain Transaction Analyzer
+# txplained - Multi-Chain Transaction Analyzer
 
-🔍 **TX or didn't happen.**
+🔍 **tx or didn't happen.**
 
-A clean, modern frontend for the TXplained transaction analysis service. Simply paste any transaction hash from supported chains and get a human-friendly explanation of what happened.
+A clean, modern frontend for the txplained transaction analysis service. Simply paste any transaction hash from supported chains and get a human-friendly explanation of what happened.
 
 ## 🌐 Supported Chains
 
-This app leverages the [TXplained API](https://txplained-agent.vercel.app/) which supports:
+This app leverages the [txplained API](https://txplained-agent.vercel.app/) which supports:
 
 ### EVM Compatible Chains
 - **Ethereum** - The original smart contract platform
@@ -67,16 +67,16 @@ This app leverages the [TXplained API](https://txplained-agent.vercel.app/) whic
 
 ## 🔧 Architecture
 
-This is a lightweight Next.js frontend that provides a clean interface for the TXplained analysis service.
+This is a lightweight Next.js frontend that provides a clean interface for the txplained analysis service.
 
 ### How It Works
 1. **User Input**: Accept transaction hashes or explorer URLs
 2. **Format Validation**: Basic client-side validation for hash formats
-3. **API Proxy**: Forward requests to the [TXplained API](https://txplained-agent.vercel.app/)
+3. **API Proxy**: Forward requests to the [txplained API](https://txplained-agent.vercel.app/)
 4. **UI Display**: Present the analysis results in a chat-like interface
 
 ### Supported Transaction Types
-The external TXplained API handles analysis for:
+The external txplained API handles analysis for:
 
 #### EVM Chains
 - ✅ Simple ETH/token transfers
@@ -100,7 +100,7 @@ The external TXplained API handles analysis for:
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **Icons**: Lucide React + Heroicons
-- **API**: [TXplained Service](https://txplained-agent.vercel.app/)
+- **API**: [txplained Service](https://txplained-agent.vercel.app/)
 
 ## 🎯 Use Cases
 
@@ -121,15 +121,15 @@ POST /api/analyze-transaction
 }
 ```
 
-The request is forwarded to the TXplained service at `https://txplained-agent.vercel.app/api/analyze-transaction`.
+The request is forwarded to the txplained service at `https://txplained-agent.vercel.app/api/analyze-transaction`.
 
-For direct API access, you can use the TXplained service directly.
+For direct API access, you can use the txplained service directly.
 
-## 🏷️ About TXplained
+## 🏷️ About txplained
 
-**TXplained** makes blockchain transactions understandable for everyone. Whether you're a DeFi power user, developer, or crypto curious, we decode the complexity so you can focus on what matters.
+**txplained** makes blockchain transactions understandable for everyone. Whether you're a DeFi power user, developer, or crypto curious, we decode the complexity so you can focus on what matters.
 
-*TX or didn't happen* - because every transaction tells a story.
+*tx or didn't happen* - because every transaction tells a story.
 
 ---
 

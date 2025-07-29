@@ -30,7 +30,7 @@ export function HomePage() {
             <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500">
               <Zap className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-slate-900">TXplained</span>
+            <span className="text-xl font-bold text-slate-900">txplained</span>
           </div>
           
           <div className="hidden md:flex items-center space-x-6">
@@ -65,7 +65,7 @@ export function HomePage() {
           {/* Main Heading */}
           <h1 className="mb-6 text-5xl font-bold tracking-tight text-slate-900 md:text-7xl">
             <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-green-600 bg-clip-text text-transparent">
-              TXplained
+              txplained
             </span>
             <br />
             <span className="text-3xl md:text-5xl font-medium text-slate-700">
@@ -75,7 +75,7 @@ export function HomePage() {
 
           {/* Subheading */}
           <p className="mb-12 text-xl text-slate-600 max-w-2xl mx-auto">
-            TX or didn&apos;t happen. Get AI-powered analysis of any blockchain transaction across Ethereum, Solana, and more.
+            tx or didn&apos;t happen. Get AI-powered analysis of any blockchain transaction across Ethereum, Solana, and more.
           </p>
 
           {/* Search Box */}
@@ -184,10 +184,10 @@ export function HomePage() {
                 <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500">
                   <Zap className="w-5 h-5 text-white" />
                 </div>
-                <span className="text-xl font-bold text-slate-900">TXplained</span>
+                <span className="text-xl font-bold text-slate-900">txplained</span>
               </div>
               <p className="text-slate-600 max-w-md">
-                Making blockchain transactions understandable for everyone. TX or didn&apos;t happen.
+                Making blockchain transactions understandable for everyone. tx or didn&apos;t happen.
               </p>
             </div>
 
@@ -214,7 +214,7 @@ export function HomePage() {
 
           <div className="mt-12 pt-8 border-t border-emerald-100 flex flex-col md:flex-row justify-between items-center">
             <p className="text-slate-500 text-sm">
-              © 2024 TXplained. All rights reserved.
+              © 2024 txplained. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <a href="#" className="text-slate-500 hover:text-emerald-600 transition-colors text-sm">Privacy</a>

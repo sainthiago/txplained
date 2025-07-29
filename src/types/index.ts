@@ -1,4 +1,4 @@
-// Updated interfaces to match the new TXplained API response
+// Updated interfaces to match the new txplained API response
 export interface TransactionAnalysis {
   summary: string;
   action: string;
