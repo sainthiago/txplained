@@ -55,7 +55,7 @@ export function HomePage() {
           <div className="absolute bottom-40 right-1/3 w-60 h-60 rounded-full bg-green-200/20 blur-3xl"></div>
         </div>
 
-        <div className="relative mx-auto max-w-4xl text-center">
+        <div className="relative mx-auto max-w-6xl text-center">
           {/* Badge */}
           <div className="mb-8 inline-flex items-center rounded-full bg-emerald-100/80 px-4 py-2 text-sm text-emerald-700 backdrop-blur-sm border border-emerald-200">
             <Zap className="mr-2 h-4 w-4 text-emerald-600" />

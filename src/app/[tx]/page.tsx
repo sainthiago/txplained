@@ -1,15 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
-import { APIResponse } from '@/types';
 import { SimpleHeader } from '@/components/SimpleHeader';
 import { SimpleTransactionView } from '@/components/SimpleTransactionView';
+import { APIResponse } from '@/types';
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function TransactionPage() {
   const params = useParams();
   const txHash = decodeURIComponent(params.tx as string);
-  
+
   const [apiResponse, setApiResponse] = useState<APIResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -73,9 +73,9 @@ export default function TransactionPage() {
       }
 
       const data: APIResponse = await response.json();
-      
+
       console.log('API Response:', data);
-      
+
       if (!data.success) {
         throw new Error('Transaction analysis failed');
       }
@@ -104,7 +104,7 @@ export default function TransactionPage() {
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
         {error && (
-          <div className="max-w-4xl mx-auto mb-6">
+          <div className="max-w-6xl mx-auto mb-6">
             <div className="bg-red-50 border border-red-200 rounded-lg p-4 shadow-sm">
               <div className="flex items-start space-x-3">
                 <div className="w-5 h-5 text-red-600 mt-0.5">⚠️</div>
@@ -117,21 +117,21 @@ export default function TransactionPage() {
         )}
 
         {isLoading ? (
-          <div className="max-w-4xl mx-auto">
-            <SimpleTransactionView 
-              txHash={txHash} 
+          <div className="max-w-6xl mx-auto">
+            <SimpleTransactionView
+              txHash={txHash}
               apiResponse={null}
-              isLoading={true} 
+              isLoading={true}
             />
           </div>
         ) : apiResponse ? (
-          <div className="max-w-4xl mx-auto">
-            <SimpleTransactionView 
-              txHash={apiResponse.txData.hash} 
+          <div className="max-w-6xl mx-auto">
+            <SimpleTransactionView
+              txHash={apiResponse.txData.hash}
               apiResponse={apiResponse}
             />
           </div>
-        ) : (
+        ) : error ? (
           /* No valid transaction hash */
           <div className="max-w-2xl mx-auto text-center py-16">
             <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-red-100 to-orange-100 rounded-full flex items-center justify-center shadow-lg">
@@ -140,11 +140,11 @@ export default function TransactionPage() {
             <h2 className="text-2xl font-bold text-slate-900 mb-3">
               Invalid Transaction Hash
             </h2>
-            <p className="text-slate-600 mb-6">
+            <p className="text-slate-600 mb-6 break-all">
               The provided transaction hash &quot;{txHash}&quot; is not valid. Please enter a valid transaction hash from Ethereum, Base, Arbitrum, Polygon, Solana, or other supported chains.
             </p>
           </div>
-        )}
+        ) : null}
       </main>
     </div>
   );

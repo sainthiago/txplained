@@ -4,9 +4,7 @@ import { APIResponse } from '@/types';
 import {
     Activity,
     AlertTriangle,
-    BarChart3,
     Bot,
-    CheckCircle2,
     Clock,
     Code,
     DollarSign,
@@ -14,7 +12,6 @@ import {
     FileText,
     Fuel,
     Hash,
-    Image,
     Key,
     Layers,
     Loader2,
@@ -25,7 +22,6 @@ import {
     TrendingUp,
     User,
     Users,
-    XCircle,
     Zap
 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
@@ -202,7 +198,7 @@ export function SimpleTransactionView({ txHash, apiResponse, isLoading }: Simple
     const { txData, analysis, links } = apiResponse;
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 h-full max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 h-full mx-auto">
             {/* Transaction Analysis - Left Side (3/5 width = 60%) */}
             <div className="lg:col-span-3 space-y-6">
                 <div className="bg-white/90 backdrop-blur-sm rounded-xl border border-emerald-100 shadow-lg overflow-hidden">
@@ -217,10 +213,10 @@ export function SimpleTransactionView({ txHash, apiResponse, isLoading }: Simple
                                         <span className="text-sm text-slate-600">{txData.chainName}</span>
                                         <span className="text-slate-400">•</span>
                                         <span className={`text-xs px-2 py-1 rounded-full font-medium ${analysis.metadata.complexity === 'simple'
-                                                ? 'bg-emerald-100 text-emerald-800'
-                                                : analysis.metadata.complexity === 'medium'
-                                                    ? 'bg-yellow-100 text-yellow-800'
-                                                    : 'bg-red-100 text-red-800'
+                                            ? 'bg-emerald-100 text-emerald-800'
+                                            : analysis.metadata.complexity === 'medium'
+                                                ? 'bg-yellow-100 text-yellow-800'
+                                                : 'bg-red-100 text-red-800'
                                             }`}>
                                             {analysis.metadata.complexity}
                                         </span>
@@ -243,33 +239,6 @@ export function SimpleTransactionView({ txHash, apiResponse, isLoading }: Simple
                             </a>
                         </div>
 
-                        {/* Status Result */}
-                        <div className="flex items-start space-x-4 mb-6">
-                            <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${analysis.result.includes('✅')
-                                    ? 'bg-emerald-100'
-                                    : 'bg-red-100'
-                                }`}>
-                                {analysis.result.includes('✅') ? (
-                                    <CheckCircle2 className="h-6 w-6 text-emerald-600" />
-                                ) : (
-                                    <XCircle className="h-6 w-6 text-red-600" />
-                                )}
-                            </div>
-                            <div className="flex-1">
-                                <h3 className={`text-lg font-semibold ${analysis.result.includes('✅')
-                                        ? 'text-emerald-800'
-                                        : 'text-red-800'
-                                    }`}>
-                                    {analysis.result}
-                                </h3>
-                                <p className={`mt-1 text-sm ${analysis.result.includes('✅')
-                                        ? 'text-emerald-700'
-                                        : 'text-red-700'
-                                    }`}>
-                                    {analysis.summary}
-                                </p>
-                            </div>
-                        </div>
 
                         {/* Natural Summary - Display if available */}
                         {apiResponse.naturalSummary && (
@@ -311,8 +280,8 @@ export function SimpleTransactionView({ txHash, apiResponse, isLoading }: Simple
                                         key={tab}
                                         onClick={() => setActiveTab(tab as 'overview' | 'technical' | 'breakdown')}
                                         className={`py-2 px-1 border-b-2 font-medium text-sm capitalize transition-colors ${activeTab === tab
-                                                ? 'border-emerald-500 text-emerald-600'
-                                                : 'border-transparent text-slate-500 hover:text-slate-700'
+                                            ? 'border-emerald-500 text-emerald-600'
+                                            : 'border-transparent text-slate-500 hover:text-slate-700'
                                             }`}
                                     >
                                         {tab}
@@ -352,8 +321,8 @@ export function SimpleTransactionView({ txHash, apiResponse, isLoading }: Simple
                                             <div>
                                                 <p className="text-sm font-medium text-slate-700">Status</p>
                                                 <p className={`text-sm font-medium ${txData.status === 'success'
-                                                        ? 'text-emerald-600'
-                                                        : 'text-red-600'
+                                                    ? 'text-emerald-600'
+                                                    : 'text-red-600'
                                                     }`}>
                                                     {txData.status.toUpperCase()}
                                                 </p>
@@ -641,14 +610,14 @@ export function SimpleTransactionView({ txHash, apiResponse, isLoading }: Simple
                                                             </span>
                                                         )}
                                                     </div>
-                                                    
+
                                                     <div className="space-y-3">
                                                         {/* Program Info */}
                                                         <div>
                                                             <p className="text-xs font-medium text-slate-600 mb-1">Program Account:</p>
                                                             <div className="flex items-center space-x-2">
                                                                 <span className="font-mono text-sm text-slate-700 bg-purple-50 px-2 py-1 rounded">
-                                                                    {txData.accountKeys && txData.accountKeys[instruction.programIdIndex] 
+                                                                    {txData.accountKeys && txData.accountKeys[instruction.programIdIndex]
                                                                         ? formatAddress(txData.accountKeys[instruction.programIdIndex])
                                                                         : `Index ${instruction.programIdIndex}`
                                                                     }
@@ -689,8 +658,8 @@ export function SimpleTransactionView({ txHash, apiResponse, isLoading }: Simple
                                                             <div className="bg-slate-100 p-2 rounded border">
                                                                 <div className="flex items-center justify-between">
                                                                     <span className="font-mono text-xs text-slate-700 break-all">
-                                                                        {instruction.data.length > 40 
-                                                                            ? `${instruction.data.slice(0, 40)}...` 
+                                                                        {instruction.data.length > 40
+                                                                            ? `${instruction.data.slice(0, 40)}...`
                                                                             : instruction.data
                                                                         }
                                                                     </span>
@@ -759,8 +728,8 @@ export function SimpleTransactionView({ txHash, apiResponse, isLoading }: Simple
                                 {/* Processing Time */}
                                 <div className="text-center text-sm text-slate-500 bg-slate-50 p-3 rounded-lg">
                                     <Clock className="h-4 w-4 inline mr-2" />
-                                    Analysis processed in {analysis.metadata.timeProcessed ? 
-                                        `${(Date.now() - analysis.metadata.timeProcessed) / 1000}s` : 
+                                    Analysis processed in {analysis.metadata.timeProcessed ?
+                                        `${(Date.now() - analysis.metadata.timeProcessed) / 1000}s` :
                                         'unknown time'
                                     }
                                 </div>
@@ -788,8 +757,8 @@ export function SimpleTransactionView({ txHash, apiResponse, isLoading }: Simple
                                                             </div>
                                                         </div>
                                                         <span className={`text-xs px-2 py-1 rounded-full ${contract.verified
-                                                                ? 'bg-emerald-100 text-emerald-800'
-                                                                : 'bg-yellow-100 text-yellow-800'
+                                                            ? 'bg-emerald-100 text-emerald-800'
+                                                            : 'bg-yellow-100 text-yellow-800'
                                                             }`}>
                                                             {contract.verified ? 'Verified' : 'Unverified'}
                                                         </span>
@@ -880,22 +849,22 @@ export function SimpleTransactionView({ txHash, apiResponse, isLoading }: Simple
                     </div>
 
                     {/* Messages Area */}
-                    <div 
+                    <div
                         ref={(el) => {
                             if (el) {
                                 // Completely prevent scroll propagation
                                 const preventScrollPropagation = (e: Event) => {
                                     e.stopPropagation();
                                 };
-                                
+
                                 const preventWheelPropagation = (e: WheelEvent) => {
                                     const element = e.currentTarget as HTMLElement;
                                     const isScrolledToTop = element.scrollTop === 0;
                                     const isScrolledToBottom = element.scrollTop + element.clientHeight >= element.scrollHeight;
-                                    
+
                                     // Always stop propagation
                                     e.stopPropagation();
-                                    
+
                                     // Only prevent default if we're at boundaries to allow internal scrolling
                                     if ((isScrolledToTop && e.deltaY < 0) || (isScrolledToBottom && e.deltaY > 0)) {
                                         e.preventDefault();
@@ -906,7 +875,7 @@ export function SimpleTransactionView({ txHash, apiResponse, isLoading }: Simple
                                 el.removeEventListener('scroll', preventScrollPropagation);
                                 el.removeEventListener('wheel', preventWheelPropagation);
                                 el.removeEventListener('touchmove', preventScrollPropagation);
-                                
+
                                 // Add listeners
                                 el.addEventListener('scroll', preventScrollPropagation, { passive: false });
                                 el.addEventListener('wheel', preventWheelPropagation, { passive: false });
@@ -914,7 +883,7 @@ export function SimpleTransactionView({ txHash, apiResponse, isLoading }: Simple
                             }
                         }}
                         className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0"
-                        style={{ 
+                        style={{
                             overscrollBehavior: 'contain',
                             scrollbarWidth: 'thin',
                             scrollbarColor: '#10b981 transparent',
@@ -932,8 +901,8 @@ export function SimpleTransactionView({ txHash, apiResponse, isLoading }: Simple
                             messages.map((message) => (
                                 <div key={message.id} className={`flex ${message.type === 'question' ? 'justify-end' : 'justify-start'}`}>
                                     <div className={`max-w-[90%] p-3 rounded-lg ${message.type === 'question'
-                                            ? 'bg-emerald-600 text-white ml-4'
-                                            : 'bg-slate-100 text-slate-900 mr-4'
+                                        ? 'bg-emerald-600 text-white ml-4'
+                                        : 'bg-slate-100 text-slate-900 mr-4'
                                         }`}>
                                         <div className="flex items-start space-x-2">
                                             {message.type === 'answer' && (

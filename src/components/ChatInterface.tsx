@@ -150,7 +150,7 @@ export function ChatInterface() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto h-[calc(100vh-200px)] flex flex-col">
+    <div className="max-w-6xl mx-auto h-[calc(100vh-200px)] flex flex-col">
       {/* Chat Messages */}
       <div className="flex-1 overflow-y-auto space-y-4 p-4 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
         {messages.map((message) => (
