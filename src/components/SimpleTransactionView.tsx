@@ -106,8 +106,6 @@ export function SimpleTransactionView({ txHash, apiResponse, isLoading }: Simple
         return `${address.slice(0, 6)}...${address.slice(-4)}`;
     };
 
-    console.log('apiResponse', {apiResponse});
-
     const formatValue = (value: string, symbol = 'ETH') => {
         const num = parseFloat(value);
         if (num === 0) return '0';
