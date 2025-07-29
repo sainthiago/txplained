@@ -1,6 +1,6 @@
 'use client';
 
-import { Activity, ArrowRight, Search } from 'lucide-react';
+import { ArrowRight, Search, Zap } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -32,21 +32,24 @@ export function SimpleHeader({ initialValue = '', isLoading }: SimpleHeaderProps
     };
 
     return (
-        <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50">
+        <header className="bg-white/90 backdrop-blur-md border-b border-emerald-100 sticky top-0 z-50 shadow-sm">
             <div className="container mx-auto px-4 py-4">
                 <div className="grid grid-cols-3 items-center gap-4">
                     {/* Logo */}
                     <Link href="/">
                         <div className="flex items-center space-x-2">
-                            <Activity className="h-7 w-7 text-blue-600" />
-                            <span className="text-xl font-bold text-slate-900 dark:text-slate-100">
-                                TXplained
-                                <div className="text-xs text-slate-600 dark:text-slate-400 font-medium">
+                            <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500">
+                                <Zap className="h-4 w-4 text-white" />
+                            </div>
+                            <div>
+                                <span className="text-xl font-bold text-slate-900">
+                                    TXplained
+                                </span>
+                                <div className="text-xs text-slate-600 font-medium">
                                     TX or didn&apos;t happen
                                 </div>
-                            </span>
-                        </div>
-                    </Link>
+                            </div>
+                        </div></Link>
 
                     {/* Centered Search Bar */}
                     <form onSubmit={handleSubmit} className="flex justify-center">
@@ -58,7 +61,7 @@ export function SimpleHeader({ initialValue = '', isLoading }: SimpleHeaderProps
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}
                                     placeholder="Search transaction hash (0x... or Solana signature)"
-                                    className="w-full pl-10 pr-4 py-3 border border-slate-300 dark:border-slate-600 rounded-l-lg bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors border-r-0"
+                                    className="w-full pl-10 pr-4 py-3 border border-emerald-200 rounded-l-lg bg-white text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors border-r-0"
                                     disabled={isLoading}
                                 />
                             </div>
@@ -66,7 +69,7 @@ export function SimpleHeader({ initialValue = '', isLoading }: SimpleHeaderProps
                                 type="submit"
                                 onClick={handleSearch}
                                 disabled={!input.trim() || isLoading}
-                                className="px-4 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-400 text-white rounded-r-lg border border-blue-600 dark:border-blue-600 transition-colors flex items-center justify-center min-w-[50px]"
+                                className="px-4 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 disabled:bg-slate-400 text-white rounded-r-lg border border-emerald-500 transition-colors flex items-center justify-center min-w-[50px] shadow-lg"
                             >
                                 {isLoading ? (
                                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
@@ -78,18 +81,14 @@ export function SimpleHeader({ initialValue = '', isLoading }: SimpleHeaderProps
                     </form>
 
                     {/* Chain Support Indicator */}
-                    <div className="hidden lg:flex items-center justify-end space-x-3 text-sm text-slate-600 dark:text-slate-400">
+                    <div className="hidden lg:flex items-center justify-end space-x-3 text-sm text-slate-600">
                         <div className="flex items-center space-x-1">
-                            <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                            <span>ETH</span>
+                            <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
+                            <span>Multi-chain</span>
                         </div>
                         <div className="flex items-center space-x-1">
-                            <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-                            <span>SOL</span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                            <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                            <span>+</span>
+                            <span className="w-2 h-2 bg-teal-500 rounded-full"></span>
+                            <span>AI-powered</span>
                         </div>
                     </div>
                 </div>

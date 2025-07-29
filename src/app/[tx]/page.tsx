@@ -2,22 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import { TransactionAnalysis, TransactionData } from '@/types';
+import { APIResponse } from '@/types';
 import { SimpleHeader } from '@/components/SimpleHeader';
 import { SimpleTransactionView } from '@/components/SimpleTransactionView';
-
-interface AnalyzedTransaction {
-  txHash: string;
-  analysis: TransactionAnalysis;
-  txData?: TransactionData;
-  timestamp: number;
-}
 
 export default function TransactionPage() {
   const params = useParams();
   const txHash = decodeURIComponent(params.tx as string);
   
-  const [currentAnalysis, setCurrentAnalysis] = useState<AnalyzedTransaction | null>(null);
+  const [apiResponse, setApiResponse] = useState<APIResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -79,16 +72,15 @@ export default function TransactionPage() {
         throw new Error(`Analysis failed: ${response.statusText}`);
       }
 
-      const data = await response.json();
+      const data: APIResponse = await response.json();
       
-      const analyzedTx: AnalyzedTransaction = {
-        txHash: processedHash,
-        analysis: data.analysis,
-        txData: data.txData,
-        timestamp: Date.now(),
-      };
+      console.log('API Response:', data);
+      
+      if (!data.success) {
+        throw new Error('Transaction analysis failed');
+      }
 
-      setCurrentAnalysis(analyzedTx);
+      setApiResponse(data);
     } catch (error) {
       console.error('Analysis error:', error);
       setError(`Sorry, I couldn't analyze this transaction. Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
@@ -105,7 +97,7 @@ export default function TransactionPage() {
   }, [txHash]);
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-emerald-50 to-teal-50">
       {/* Header with the current transaction hash */}
       <SimpleHeader initialValue={txHash} isLoading={isLoading} />
 
@@ -113,10 +105,10 @@ export default function TransactionPage() {
       <main className="container mx-auto px-4 py-8">
         {error && (
           <div className="max-w-4xl mx-auto mb-6">
-            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4 shadow-sm">
               <div className="flex items-start space-x-3">
                 <div className="w-5 h-5 text-red-600 mt-0.5">⚠️</div>
-                <span className="text-red-800 dark:text-red-200 text-sm">
+                <span className="text-red-800 text-sm">
                   {error}
                 </span>
               </div>
@@ -128,30 +120,29 @@ export default function TransactionPage() {
           <div className="max-w-4xl mx-auto">
             <SimpleTransactionView 
               txHash={txHash} 
-              analysis={{} as TransactionAnalysis} 
+              apiResponse={null}
               isLoading={true} 
             />
           </div>
-        ) : currentAnalysis ? (
+        ) : apiResponse ? (
           <div className="max-w-4xl mx-auto">
             <SimpleTransactionView 
-              txHash={currentAnalysis.txHash} 
-              analysis={currentAnalysis.analysis}
-              txData={currentAnalysis.txData}
+              txHash={apiResponse.txData.hash} 
+              apiResponse={apiResponse}
             />
           </div>
         ) : (
           /* No valid transaction hash */
           <div className="max-w-2xl mx-auto text-center py-16">
-            <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-red-100 to-orange-100 dark:from-red-900/40 dark:to-orange-900/40 rounded-full flex items-center justify-center">
+            <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-red-100 to-orange-100 rounded-full flex items-center justify-center shadow-lg">
               <span className="text-2xl">❌</span>
             </div>
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-3">
+            <h2 className="text-2xl font-bold text-slate-900 mb-3">
               Invalid Transaction Hash
             </h2>
-                         <p className="text-slate-600 dark:text-slate-400 mb-6">
-               The provided transaction hash &quot;{txHash}&quot; is not valid. Please enter a valid transaction hash from Ethereum, Base, Arbitrum, Polygon, Solana, or other supported chains.
-             </p>
+            <p className="text-slate-600 mb-6">
+              The provided transaction hash &quot;{txHash}&quot; is not valid. Please enter a valid transaction hash from Ethereum, Base, Arbitrum, Polygon, Solana, or other supported chains.
+            </p>
           </div>
         )}
       </main>

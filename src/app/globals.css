@@ -1,8 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fafafa;
+  --foreground: #0f172a;
+  --primary: #059669;
+  --primary-foreground: #ffffff;
+  --accent: #0d9488;
+  --accent-foreground: #ffffff;
 }
 
 @theme inline {
@@ -14,13 +18,107 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0f172a;
+    --foreground: #f8fafc;
+    --primary: #10b981;
+    --primary-foreground: #0f172a;
+    --accent: #14b8a6;
+    --accent-foreground: #0f172a;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-feature-settings: 'rlig' 1, 'calt' 1;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent scroll chaining - this is the key fix */
+html {
+  overscroll-behavior: none;
+}
+
+body {
+  overscroll-behavior: none;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(16, 185, 129, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(16, 185, 129, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 185, 129, 0.5);
+}
+
+/* Chat container specific scrolling */
+.chat-container {
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+
+/* Gradient animations */
+@keyframes gradient-x {
+  0%, 100% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes gradient-y {
+  0%, 100% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(-100%);
+  }
+}
+
+.animate-gradient-x {
+  animation: gradient-x 15s ease infinite;
+}
+
+.animate-gradient-y {
+  animation: gradient-y 15s ease infinite;
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(16, 185, 129, 0.2);
+  color: #0f172a;
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid #10b981;
+  outline-offset: 2px;
+}
+
+/* Smooth transitions */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
