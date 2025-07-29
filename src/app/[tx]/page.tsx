@@ -74,8 +74,6 @@ export default function TransactionPage() {
 
       const data: APIResponse = await response.json();
 
-      console.log('API Response:', data);
-
       if (!data.success) {
         throw new Error('Transaction analysis failed');
       }
